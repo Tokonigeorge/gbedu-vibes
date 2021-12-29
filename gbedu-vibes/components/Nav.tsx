@@ -6,7 +6,7 @@ export default function Nav() {
     <div className="flex justify-between items-center">
       <Gbedu />
       <Link href="/team">
-        <a className="text-brownbase">Our Team</a>
+        <a className="text-brownbase text-opacity-70">Our Team</a>
       </Link>
     </div>
   );

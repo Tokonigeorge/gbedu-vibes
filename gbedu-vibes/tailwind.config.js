@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         greenbase: "#228B22",
         brownbase: "#A52A2A",
+        spotifygreen: "#1DB954",
       },
     },
   },

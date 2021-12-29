@@ -3,7 +3,8 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Nav from "../components/Nav";
-import Header from "../components/Login.tsx/Header";
+import Header from "../components/Login/Header";
+import Login from "../components/Login/Login";
 
 const Home: NextPage = () => (
   <div>
@@ -17,6 +18,9 @@ const Home: NextPage = () => (
       <div className="pt-6 px-6 md:px-24 sm:px-12">
         <Nav />
         <Header />
+        <div className="flex items-center justify-center pt-6">
+          <Login />
+        </div>
       </div>
     </main>
   </div>
