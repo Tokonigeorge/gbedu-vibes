@@ -1,13 +1,23 @@
 import Image from "Next/image";
+import styles from "../../styles/gilgongoFont.module.css";
 
 export default function Header() {
   return (
-    <div className="relative">
-      <span className="absolute left-0 top-42">
-        <Image src="/leaves.svg" height="50" width="50" />
+    <div className="flex items-center justify-center flex-col mt-4">
+      <span className="hidden md:block">
+        {" "}
+        <Image src="/header.svg" height="300" width="500" />
       </span>
-      <Image src="/girl.svg" height="300" width="300" />
-      <Image src="/clock.svg" height="50" width="50" />
+      <span className="block md:hidden">
+        {" "}
+        <Image src="/header.svg" height="500" width="500" />
+      </span>
+      <p className="text-center text-sm">
+        Detect your{" "}
+        <span className={`${styles.gbedu} text-brownbase`}>mood</span> through
+        your{" "}
+        <span className={`${styles.gbedu} text-brownbase`}>recent Gbedu.</span>
+      </p>
     </div>
   );
 }
