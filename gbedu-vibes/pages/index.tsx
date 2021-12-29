@@ -3,8 +3,8 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Nav from "../components/Nav";
-import Header from "../components/Login/Header";
-import Login from "../components/Login/Login";
+import Header from "../components/loginPage/Header";
+import Login from "../components/loginPage/Login";
 
 const Home: NextPage = () => (
   <div>

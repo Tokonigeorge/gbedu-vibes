@@ -1,4 +1,4 @@
-import Link from "Next/Link";
+import Link from "next/link";
 import Gbedu from "../components/Gbedu";
 
 export default function Nav() {

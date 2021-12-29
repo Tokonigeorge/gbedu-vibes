@@ -3,7 +3,7 @@ import styles from "../../styles/gilgongoFont.module.css";
 
 export default function Header() {
   return (
-    <div className="flex items-center justify-center flex-col mt-4">
+    <div className="flex items-center justify-center flex-col mt-10">
       <span className="hidden md:block">
         {" "}
         <Image src="/header.svg" height="300" width="500" />
