@@ -5,6 +5,12 @@
 // import { User } from 'path/to/interfaces';
 
 export type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
+
+export type GetToken = {
+  access_token: string;
+  expires_in: string;
+  token_type: string;
+};

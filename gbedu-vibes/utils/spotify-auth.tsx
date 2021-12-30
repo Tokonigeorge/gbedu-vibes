@@ -1,3 +1,5 @@
+import { GetToken } from "../interfaces/index";
+
 export const endpoint: string = "https://accounts.spotify.com/authorize";
 const clientId: string = "47330e5a65544359b3c736707cf071ed"; //set to an env variable
 const redirectUri: string = "http://localhost:3000/";
@@ -10,7 +12,7 @@ const scopes: string[] = [
   "playlist-modify-private",
 ];
 
-export const getToken = () => {
+export const getToken = (): GetToken => {
   return window.location.hash
     .substring(1)
     .split("&")
@@ -21,6 +23,6 @@ export const getToken = () => {
     }, {});
 };
 
-export const loginUrl = `${endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+export const loginUrl: string = `${endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
   "%20"
 )}&response_type=token&show_dialog=true`;
