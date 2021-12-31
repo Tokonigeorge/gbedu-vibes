@@ -12,7 +12,7 @@ const scopes: string[] = [
   "playlist-modify-private",
 ];
 
-export const getToken = (): GetToken => {
+export const getToken = (): any => {
   return window.location.hash
     .substring(1)
     .split("&")
