@@ -26,6 +26,8 @@ const Home: NextPage = () => {
     spotifyWeb.setAccessToken(token);
     //after setting the accesstoken for aouth, get user
     spotifyWeb.getMe().then((user) => dispatch(updateUserData(user)));
+    //add error catch incase user can't be found as a popup?
+    //maybe also add dependency to the useeffect
   };
   useEffect(() => {
     getUser();
@@ -40,10 +42,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="">
-        <div className="pt-6 px-6 md:px-24 sm:px-12">
-          <Nav />
+        <div className="pt-6 px-6 md:px-24 sm:px-12 bg-background h-screen">
+          <Nav showTeam={true} />
           <Header />
-          <div className="flex items-center justify-center pt-6">
+          <div className="flex items-center justify-center pt-8">
             <Login />
           </div>
         </div>
