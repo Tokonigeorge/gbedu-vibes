@@ -11,6 +11,8 @@ module.exports = {
         spotifygreen: "#1DB954",
         spotifyhovergreen: "#2C9350",
         background: "#F8F0F3",
+        iconGreen : "#2C9350",
+        iconPink: "#A52A2A",
       },
     },
   },
