@@ -20,7 +20,11 @@ export default function MoodHome() {
 
 const HomeCards = ({ moodCard }: { moodCard?: boolean }) => {
   return (
-    <div className="bg-offWhite w-96 flex flex-col items-center justify-center py-4 px-2 rounded-md">
+    <div
+      className={`bg-offWhite w-96 flex flex-col items-center justify-center py-4 px-2 rounded-md  hover:ring-2 ${
+        moodCard ? "hover:ring-cardGreen" : "hover:ring-cardRed"
+      }`}
+    >
       <Image
         src={`${moodCard ? "/getmood.svg" : "/getplaylist.svg"}`}
         height={200}

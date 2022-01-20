@@ -14,6 +14,8 @@ module.exports = {
         iconGreen: "#2C9350",
         iconPink: "#A52A2A",
         offWhite: "#F5F5F5",
+        cardGreen: "#2C9350",
+        cardRed: "#A52A2A",
       },
     },
   },
