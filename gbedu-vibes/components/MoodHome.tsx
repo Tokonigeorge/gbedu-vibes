@@ -3,17 +3,21 @@ import Link from "next/link";
 
 export default function MoodHome() {
   return (
-    <div className="flex items-stretch justify-center mt-24 gap-x-16">
-      <Link href="/mood">
-        <a>
-          <HomeCards moodCard={true} />
-        </a>
-      </Link>
-      <Link href="/playlistmood">
-        <a>
-          <HomeCards />
-        </a>
-      </Link>
+    <div className="flex sm:flex-row flex-col sm:items-stretch items-center justify-center mt-24 gap-x-16">
+      <div className="sm:w-1/3 w-3/4">
+        <Link href="/mood">
+          <a>
+            <HomeCards moodCard={true} />
+          </a>
+        </Link>
+      </div>
+      <div className="sm:w-1/3 w-3/4 my-16 sm:my-0">
+        <Link href="/playlistmood">
+          <a>
+            <HomeCards />
+          </a>
+        </Link>
+      </div>
     </div>
   );
 }
@@ -21,7 +25,7 @@ export default function MoodHome() {
 const HomeCards = ({ moodCard }: { moodCard?: boolean }) => {
   return (
     <div
-      className={`bg-offWhite w-96 flex flex-col items-center justify-center py-4 px-2 rounded-md  hover:ring-2 ${
+      className={`bg-offWhite w-full flex flex-col items-center justify-center py-4 px-2 rounded-md  hover:ring-2 ${
         moodCard ? "hover:ring-cardGreen" : "hover:ring-cardRed"
       }`}
     >
