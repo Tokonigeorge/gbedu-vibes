@@ -36,10 +36,10 @@ const Home: NextPage = () => {
     const _hash = getToken();
     //set the hash of the window to ""
     window.location.hash = "";
-    //  const _token:string = _hash.access_token;
-    const token: string =
-      "BQB7833h4jctB0FFhQMEWoOKAHceStiueyTu3cqaa7ABdzUWsgrJJy2UsmOoYjpgn53U8CJTrx-MyVhEECJnuSna0Ifi5EyIXgm0A1PHLgUjssqUrSEcxY7w4ylCW84fomSshM9ZGptvR5y-V17-HB4SxZ7m2lzHX3s61TCeeQAlTStw9gwdyzmFrMLMSlkXmaAC5uspBBuUsf_xFH48ivw1f0NhwC_50hT98vQaEyimLy_iHVIz_2UM6pza3ss";
-    localStorage.setItem("token", token);
+    const _token: string = _hash.access_token;
+    // const token: string =
+    // "BQBRSpx68BdhJXD3eCDFcAux4x_KJWrz_xN6w1BUf05_dQBr41r2ZSKRF4B_WQ1OSWvCNnaMsdIyxQB7TuziO8eHflTp9Vxc_1Gevgpq3o46lJJqHsQgtGDdAmZlhGMURuQDOaqshw6ZzyNCheCCI5vW98wlK4CQ8lYpwO0REaNaLo";
+    localStorage.setItem("token", _token);
     //call getUser after setting
     getUser();
   };
@@ -60,22 +60,21 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="">
-        <div className="pt-6 px-6 md:px-24 sm:px-12 bg-background h-screen">
-          <Layout>
+        <Layout>
+          <div className="pt-6 px-6 md:px-20 sm:px-12">
             <Nav showTeam={true} />
-            {/* {user?.display_name ? (
-            <MoodHome />
-          ) : (
-            <>
-              <Header />
-              <div className="flex items-center justify-center pt-8">
-                <Login />
-              </div>
-            </>
-          )} */}
-            <MoodHome />
-          </Layout>
-        </div>
+            {user?.display_name ? (
+              <MoodHome />
+            ) : (
+              <>
+                <Header />
+                <div className="flex items-center justify-center pt-8">
+                  <Login />
+                </div>
+              </>
+            )}
+          </div>
+        </Layout>
       </main>
     </div>
   );

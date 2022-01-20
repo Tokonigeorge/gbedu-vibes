@@ -6,8 +6,8 @@ import Layout from "../components/Layout";
 
 export default function Team() {
   return (
-    <div className="pt-6 px-6 md:px-20 sm:px-12 bg-background h-screen">
-      <Layout>
+    <Layout>
+      <div className="pt-6 px-6 md:px-20 sm:px-12">
         <Nav showTeam={true} />
         <TeamMember
           avatar={avatarfemale}
@@ -24,7 +24,7 @@ export default function Team() {
           github="https://github.com/chisombiri"
           dribble="https://dribble/"
         />
-      </Layout>
-    </div>
+      </div>
+    </Layout>
   );
 }

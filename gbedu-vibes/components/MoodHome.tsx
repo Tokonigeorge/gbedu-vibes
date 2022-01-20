@@ -11,7 +11,7 @@ export default function MoodHome() {
           </a>
         </Link>
       </div>
-      <div className="sm:w-1/3 w-3/4 my-16 sm:my-0">
+      <div className="sm:w-1/3 w-3/4 mb-16 mt-8 sm:my-0">
         <Link href="/playlistmood">
           <a>
             <HomeCards />

@@ -1,7 +1,7 @@
 const Layout = ({ children }) => {
   return (
-    <div className="relative h-full">
-      <div className="absolute -top-16 left-1/3">
+    <div className="relative min-h-screen bg-background">
+      <div className="absolute -top-16 sm:left-1/3 right-16">
         <BlobGreen />
       </div>
       <div className="absolute bottom-0 right-10">
