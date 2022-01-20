@@ -9,6 +9,8 @@ import { getToken } from "../utils/spotify-auth";
 import SpotifyWebApi from "spotify-web-api-js";
 import { useDataContextVal } from "../context/dataContext";
 import { updateUserData } from "../context/actions";
+import MoodHome from "../components/MoodHome";
+import Layout from "../components/Layout";
 
 const spotifyWeb = new SpotifyWebApi();
 
@@ -20,7 +22,7 @@ const Home: NextPage = () => {
     const _hash = getToken();
     //set the hash of the window to ""
     window.location.hash = "";
-    // const _token: string = _hash.access_token;
+    //  const _token:string = _hash.access_token;
     const token: string =
       "BQB7833h4jctB0FFhQMEWoOKAHceStiueyTu3cqaa7ABdzUWsgrJJy2UsmOoYjpgn53U8CJTrx-MyVhEECJnuSna0Ifi5EyIXgm0A1PHLgUjssqUrSEcxY7w4ylCW84fomSshM9ZGptvR5y-V17-HB4SxZ7m2lzHX3s61TCeeQAlTStw9gwdyzmFrMLMSlkXmaAC5uspBBuUsf_xFH48ivw1f0NhwC_50hT98vQaEyimLy_iHVIz_2UM6pza3ss";
     spotifyWeb.setAccessToken(token);
@@ -30,6 +32,9 @@ const Home: NextPage = () => {
     //maybe also add dependency to the useeffect
   };
   useEffect(() => {
+    /*get token from localstorage
+    if present, call getUser, otherwise call getToken(and set to localstorage here)
+    */
     getUser();
   }, []);
 
@@ -43,11 +48,20 @@ const Home: NextPage = () => {
 
       <main className="">
         <div className="pt-6 px-6 md:px-24 sm:px-12 bg-background h-screen">
-          <Nav showTeam={true} />
-          <Header />
-          <div className="flex items-center justify-center pt-8">
-            <Login />
-          </div>
+          <Layout>
+            <Nav showTeam={true} />
+            {/* {user?.display_name ? (
+            <MoodHome />
+          ) : (
+            <>
+              <Header />
+              <div className="flex items-center justify-center pt-8">
+                <Login />
+              </div>
+            </>
+          )} */}
+            <MoodHome />
+          </Layout>
         </div>
       </main>
     </div>

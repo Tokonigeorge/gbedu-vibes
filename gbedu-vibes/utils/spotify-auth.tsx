@@ -5,11 +5,11 @@ const clientId: string = "47330e5a65544359b3c736707cf071ed"; //set to an env var
 const redirectUri: string = "http://localhost:3000/";
 const scopes: string[] = [
   "user-library-read",
-  "user-library-modify",
-  "playlist-modify-public",
-  "playlist-read-private",
-  "playlist-read-collaborative",
-  "playlist-modify-private",
+  // "user-library-modify",
+  // "playlist-modify-public",
+  // "playlist-read-private",
+  // "playlist-read-collaborative",
+  // "playlist-modify-private",
 ];
 
 export const getToken = (): any => {
