@@ -16,8 +16,22 @@ const spotifyWeb = new SpotifyWebApi();
 
 const Home: NextPage = () => {
   const [{ user }, dispatch] = useDataContextVal();
-  //consider setting user in localstorage so they don't have to login each time?
+  //if token is present go ahead and setAccestoken, else call setToken
   const getUser = () => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      return setToken();
+    }
+
+    spotifyWeb.setAccessToken(token);
+
+    //after setting the accesstoken for aouth, get user
+    spotifyWeb.getMe().then((user) => dispatch(updateUserData(user)));
+    //add error catch incase user can't be found as a popup?
+    //maybe also add dependency to the useeffect
+  };
+
+  const setToken = () => {
     //get object containing the acesstoken
     const _hash = getToken();
     //set the hash of the window to ""
@@ -25,12 +39,11 @@ const Home: NextPage = () => {
     //  const _token:string = _hash.access_token;
     const token: string =
       "BQB7833h4jctB0FFhQMEWoOKAHceStiueyTu3cqaa7ABdzUWsgrJJy2UsmOoYjpgn53U8CJTrx-MyVhEECJnuSna0Ifi5EyIXgm0A1PHLgUjssqUrSEcxY7w4ylCW84fomSshM9ZGptvR5y-V17-HB4SxZ7m2lzHX3s61TCeeQAlTStw9gwdyzmFrMLMSlkXmaAC5uspBBuUsf_xFH48ivw1f0NhwC_50hT98vQaEyimLy_iHVIz_2UM6pza3ss";
-    spotifyWeb.setAccessToken(token);
-    //after setting the accesstoken for aouth, get user
-    spotifyWeb.getMe().then((user) => dispatch(updateUserData(user)));
-    //add error catch incase user can't be found as a popup?
-    //maybe also add dependency to the useeffect
+    localStorage.setItem("token", token);
+    //call getUser after setting
+    getUser();
   };
+
   useEffect(() => {
     /*get token from localstorage
     if present, call getUser, otherwise call getToken(and set to localstorage here)
