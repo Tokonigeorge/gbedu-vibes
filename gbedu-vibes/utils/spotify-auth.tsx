@@ -7,8 +7,8 @@ const scopes: string[] = [
   "user-library-read",
   // "user-library-modify",
   // "playlist-modify-public",
-  // "playlist-read-private",
-  // "playlist-read-collaborative",
+  "playlist-read-private",
+  "playlist-read-collaborative",
   // "playlist-modify-private",
 ];
 
