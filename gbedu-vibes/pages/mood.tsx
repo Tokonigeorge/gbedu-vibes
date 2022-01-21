@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import Layout from "../components/Layout";
 import { useDataContextVal } from "../context/dataContext";
 import SpotifyWebApi from "spotify-web-api-js";
+import PlaylistCard from "../components/PlaylistCard";
 
 const spotifyWeb = new SpotifyWebApi();
 
@@ -35,9 +36,10 @@ export default function Mood() {
             Click a playlist to analyze.
           </p>
         </div>
-        <div>
-          {loading && <p>Loading...</p>}
-          {!data && !loading && <p>No data</p>}
+        {/* {loading && <p>Loading...</p>}
+        {!data && !loading && <p>No data</p>} */}
+        <div className="pt-10">
+          <PlaylistCard name="name" des="A spotify something something" />
         </div>
       </div>
     </Layout>
