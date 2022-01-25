@@ -1,17 +1,25 @@
-import Image from "next/image";
+// import Image from "next/image";
 import { cutString } from "../utils/cutString";
 
 export default function PlaylistCard({
   name,
   des,
+  imgSrc,
 }: {
   name: string;
   des: string;
+  imgSrc: string;
 }) {
   return (
     <div className=" bg-offWhite rounded-md flex flex-col items-center py-3">
       <div className="rounded-md">
-        <Image src="/playlistimage.svg" width={200} height={200} />
+        <img
+          alt="playlist image"
+          src={imgSrc || "/playlistimage.svg"}
+          width={200}
+          height={200}
+          className="rounded-md"
+        />
       </div>
       <div className="-mt-2 pl-5 self-start">
         {name && (

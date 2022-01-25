@@ -30,7 +30,7 @@ export default function Mood() {
         <Nav showTeam={false} />
         <div className="mt-8">
           <p className="font-semibold text-xl">
-            {user?.display_name ? `${user?.display_name},` : "Hi,"}
+            {user?.display_name ? `Hi ${user?.display_name},` : "Hi,"}
           </p>
           <p className="text-sm text-black text-opacity-60 pt-4">
             Click a playlist to analyze.
@@ -44,6 +44,7 @@ export default function Mood() {
               name={i.name}
               des={i.owner?.display_name}
               key={indx}
+              imgSrc={i.images?.[0]?.url}
             />
           ))}
         </div>
