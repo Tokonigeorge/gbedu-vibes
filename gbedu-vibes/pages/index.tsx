@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { ContextType, useEffect } from "react";
+import React, { ContextType, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Nav from "../components/Nav";
@@ -16,39 +16,29 @@ const spotifyWeb = new SpotifyWebApi();
 
 const Home: NextPage = () => {
   const [{ user }, dispatch] = useDataContextVal();
-  //if token is present go ahead and setAccestoken, else call setToken
-  const getUser = () => {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      return setToken();
-    }
 
-    spotifyWeb.setAccessToken(token);
-
-    //after setting the accesstoken for aouth, get user
-    spotifyWeb.getMe().then((user) => dispatch(updateUserData(user)));
-    //add error catch incase user can't be found as a popup?
-    //maybe also add dependency to the useeffect
-  };
-
-  const setToken = () => {
+  const setUser = () => {
     //get object containing the acesstoken
     const _hash = getToken();
     //set the hash of the window to ""
     window.location.hash = "";
     const _token: string = _hash.access_token;
-    // const token: string =
-    // "BQBRSpx68BdhJXD3eCDFcAux4x_KJWrz_xN6w1BUf05_dQBr41r2ZSKRF4B_WQ1OSWvCNnaMsdIyxQB7TuziO8eHflTp9Vxc_1Gevgpq3o46lJJqHsQgtGDdAmZlhGMURuQDOaqshw6ZzyNCheCCI5vW98wlK4CQ8lYpwO0REaNaLo";
-    localStorage.setItem("token", _token);
     //call getUser after setting
-    getUser();
+    spotifyWeb.setAccessToken(_token);
+    //after setting the accesstoken for aouth, get user and dispatch updated data
+    //add error catch incase user can't be found as a popup?
+    spotifyWeb.getMe().then((user) => {
+      localStorage.setItem("user", JSON.stringify(user)),
+        dispatch(updateUserData(user));
+    });
   };
 
   useEffect(() => {
-    /*get token from localstorage
-    if present, call getUser, otherwise call getToken(and set to localstorage here)
+    /*get user from localstorage
+    if present dispatch else call set user data
     */
-    getUser();
+    let user = JSON.parse(localStorage.getItem("user"));
+    user ? dispatch(updateUserData(user)) : setUser();
   }, []);
 
   return (

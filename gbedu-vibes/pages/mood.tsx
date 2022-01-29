@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Nav from "../components/Nav";
 import Layout from "../components/Layout";
 import { useDataContextVal } from "../context/dataContext";
@@ -26,7 +27,7 @@ export default function Mood() {
 
   return (
     <Layout>
-      <div className="bg-background pt-6 px-6 md:px-20 sm:px-12">
+      <div className=" pt-6 px-6 md:px-20 sm:px-12">
         <Nav showTeam={false} />
         <div className="mt-8">
           <p className="font-semibold text-xl">
@@ -40,12 +41,16 @@ export default function Mood() {
         {!data && !loading && <p>No data</p>} */}
         <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-10 gap-y-8">
           {data?.map((i, indx) => (
-            <PlaylistCard
-              name={i.name}
-              des={i.owner?.display_name}
-              key={indx}
-              imgSrc={i.images?.[0]?.url}
-            />
+            <Link href="/getmood">
+              <a>
+                <PlaylistCard
+                  name={i.name}
+                  des={i.owner?.display_name}
+                  key={indx}
+                  imgSrc={i.images?.[0]?.url}
+                />
+              </a>
+            </Link>
           ))}
         </div>
       </div>

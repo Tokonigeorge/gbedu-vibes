@@ -11,17 +11,19 @@ export default function PlaylistCard({
   imgSrc: string;
 }) {
   return (
-    <div className=" bg-offWhite rounded-md flex flex-col items-center py-3">
+    <div className=" bg-offWhite hover:shadow-xl cursor-pointer rounded-md flex flex-col items-center p-5">
+      {/* add transition to elements */}
       <div className="rounded-md">
+        {/* using img instead of Image from next, because of unknown domain names */}
         <img
           alt="playlist image"
-          src={imgSrc || "/playlistimage.svg"}
+          src={imgSrc || "/getmood.svg"}
           width={200}
           height={200}
-          className="rounded-md"
+          className="rounded-md object-contain shadow-lg"
         />
       </div>
-      <div className="-mt-2 pl-5 self-start">
+      <div className="mt-2 self-start">
         {name && (
           <p className="font-semibold text-sm  text-left mb-1">{name}</p>
         )}
