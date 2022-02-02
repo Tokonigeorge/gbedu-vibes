@@ -3,6 +3,7 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Layout from "../components/Layout";
 import { useDataContextVal } from "../context/dataContext";
+import { updateUserData } from "../context/actions";
 import SpotifyWebApi from "spotify-web-api-js";
 import PlaylistCard from "../components/PlaylistCard";
 
@@ -11,11 +12,13 @@ const spotifyWeb = new SpotifyWebApi();
 export default function Mood() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [{ user }] = useDataContextVal();
+  const [{ user }, dispatch] = useDataContextVal();
   /*check if onreload user gets clear, save user data in the session storage? */
-  console.log(data);
+
   useEffect(() => {
+    dispatch(updateUserData(JSON.parse(localStorage.getItem("user"))));
     setLoading(true);
+    console.log(user?.id);
     spotifyWeb
       .getUserPlaylists(user?.id)
       .then((response) => {
@@ -41,7 +44,7 @@ export default function Mood() {
         {!data && !loading && <p>No data</p>} */}
         <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-10 gap-y-8">
           {data?.map((i, indx) => (
-            <Link href="/getmood">
+            <Link href="/getmood" key={indx + `${i.name}`}>
               <a>
                 <PlaylistCard
                   name={i.name}

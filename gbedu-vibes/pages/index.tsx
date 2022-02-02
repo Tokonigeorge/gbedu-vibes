@@ -19,12 +19,14 @@ const Home: NextPage = () => {
 
   const setUser = () => {
     //get object containing the acesstoken
-    const _hash = getToken();
+    const code = getToken();
     //set the hash of the window to ""
     window.location.hash = "";
-    const _token: string = _hash.access_token;
+    // const _token: string = _hash;
     //call getUser after setting
-    spotifyWeb.setAccessToken(_token);
+    // spotifyWeb.getAccessToken()
+    // spotifyWeb.getAccessToken()
+    spotifyWeb.setAccessToken(code);
     //after setting the accesstoken for aouth, get user and dispatch updated data
     //add error catch incase user can't be found as a popup?
     spotifyWeb.getMe().then((user) => {
