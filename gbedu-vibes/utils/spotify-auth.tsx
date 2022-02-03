@@ -1,5 +1,4 @@
 import axios from "axios";
-import { exitCode } from "process";
 
 export const endpoint: string = "https://accounts.spotify.com/authorize";
 const clientId: string = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -16,19 +15,24 @@ const scopes: string[] = [
 
 export const getToken = (): any => {
   let code: string = window.location.href.split("=")[1];
-  console.log(code);
-  _getToken(code);
+  if (code) return _getToken(code);
 };
 
-const _getToken = (code: string) => {
-  axios
-    .post("/api/users", { data: code })
+const _getToken = async (code: string): Promise<string> => {
+  return axios
+    .post(
+      "/api/users",
+      {
+        data: JSON.stringify({ code }),
+      },
+      { headers: { "Content-Type": "application/json" } }
+    )
     .then((resp) => {
-      console.log("resp", resp.data);
+      return resp.data.refresh_token;
     })
     .catch((err) => {
       console.log("ERR", err);
-      // alert("Cannot get token");
+      alert("Cannot get token");
     });
 };
 

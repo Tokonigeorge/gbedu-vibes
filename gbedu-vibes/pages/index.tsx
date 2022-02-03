@@ -20,6 +20,7 @@ const Home: NextPage = () => {
   const setUser = () => {
     //get object containing the acesstoken
     const code = getToken();
+    console.log("code", code);
     //set the hash of the window to ""
     window.location.hash = "";
     // const _token: string = _hash;
