@@ -13,12 +13,16 @@ const scopes: string[] = [
   // "playlist-modify-private",
 ];
 
-export const getToken = (): any => {
+export const getToken = async (): Promise<any> => {
   let code: string = window.location.href.split("=")[1];
-  if (code) return _getToken(code);
+
+  if (code)
+    return _getToken(code)
+      .then((resp) => resp)
+      .catch((err) => err);
 };
 
-const _getToken = async (code: string): Promise<string> => {
+const _getToken = async (code: string): Promise<any> => {
   return axios
     .post(
       "/api/users",
@@ -28,7 +32,7 @@ const _getToken = async (code: string): Promise<string> => {
       { headers: { "Content-Type": "application/json" } }
     )
     .then((resp) => {
-      return resp.data.refresh_token;
+      return resp.data;
     })
     .catch((err) => {
       console.log("ERR", err);

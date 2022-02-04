@@ -16,24 +16,30 @@ const spotifyWeb = new SpotifyWebApi();
 
 const Home: NextPage = () => {
   const [{ user }, dispatch] = useDataContextVal();
+  const [token, setToken] = useState(null);
 
   const setUser = () => {
     //get object containing the acesstoken
-    const code = getToken();
-    console.log("code", code);
-    //set the hash of the window to ""
-    window.location.hash = "";
-    // const _token: string = _hash;
-    //call getUser after setting
-    // spotifyWeb.getAccessToken()
-    // spotifyWeb.getAccessToken()
-    spotifyWeb.setAccessToken(code);
-    //after setting the accesstoken for aouth, get user and dispatch updated data
-    //add error catch incase user can't be found as a popup?
-    spotifyWeb.getMe().then((user) => {
-      localStorage.setItem("user", JSON.stringify(user)),
-        dispatch(updateUserData(user));
-    });
+    !token &&
+      getToken().then((resp) => {
+        setToken(resp?.access_token);
+      });
+    if (token) {
+      spotifyWeb.setAccessToken(token);
+      //set the location of the window back without the code
+      // window.location.pathname = "";
+
+      //after setting the accesstoken for aouth, get user and dispatch updated data
+      //add error catch incase user can't be found as a popup?
+      // spotifyWeb.setAccessToken();
+      spotifyWeb
+        .getMe()
+        .then((user) => {
+          localStorage.setItem("user", JSON.stringify(user)),
+            dispatch(updateUserData(user));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   useEffect(() => {
