@@ -22,9 +22,13 @@ const Home: NextPage = () => {
     //get object containing the acesstoken
     !token &&
       getToken().then((resp) => {
+        console.log(resp);
         setToken(resp?.access_token);
       });
+    console.log(token);
+
     if (token) {
+      localStorage.setItem("token", token);
       spotifyWeb.setAccessToken(token);
       //set the location of the window back without the code
       // window.location.pathname = "";

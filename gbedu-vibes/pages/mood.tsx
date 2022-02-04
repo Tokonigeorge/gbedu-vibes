@@ -44,7 +44,16 @@ export default function Mood() {
         {!data && !loading && <p>No data</p>} */}
         <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-10 gap-y-8">
           {data?.map((i, indx) => (
-            <Link href="/getmood" key={indx + `${i.name}`}>
+            <Link
+              href={{
+                pathname: "getmood/[id]",
+                query: {
+                  id: i.id,
+                },
+              }}
+              as={`getmood/${i.id}`}
+              key={indx + `${i.name}`}
+            >
               <a>
                 <PlaylistCard
                   name={i.name}
