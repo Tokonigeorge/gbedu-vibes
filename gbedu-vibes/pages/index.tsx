@@ -5,7 +5,7 @@ import Head from "next/head";
 import Nav from "../components/Nav";
 import Header from "../components/loginPage/Header";
 import Login from "../components/loginPage/Login";
-import { getToken } from "../utils/spotify-auth";
+import { setToken } from "../utils/set-token";
 import SpotifyWebApi from "spotify-web-api-js";
 import { useDataContextVal } from "../context/dataContext";
 import { updateUserData } from "../context/actions";
@@ -16,31 +16,20 @@ const spotifyWeb = new SpotifyWebApi();
 
 const Home: NextPage = () => {
   const [{ user }, dispatch] = useDataContextVal();
-  const [token, setToken] = useState(null);
+  const [token, settoken] = useState(null);
 
-  const setUser = () => {
-    //get object containing the acesstoken
-    !token &&
-      getToken().then((resp) => {
-        console.log(resp);
-        setToken(resp?.access_token);
-      });
-    console.log(token);
-
-    if (token) {
-      localStorage.setItem("token", token);
-      spotifyWeb.setAccessToken(token);
-      //set the location of the window back without the code
-      // window.location.pathname = "";
-
-      //after setting the accesstoken for aouth, get user and dispatch updated data
-      //add error catch incase user can't be found as a popup?
-      // spotifyWeb.setAccessToken();
+  const getUser = async () => {
+    let _token: string = await setToken();
+    // console.log(_token);
+    // // settoken((prev) => _token);
+    if (_token) {
       spotifyWeb
         .getMe()
         .then((user) => {
-          localStorage.setItem("user", JSON.stringify(user)),
-            dispatch(updateUserData(user));
+          if (user) {
+            localStorage.setItem("user", JSON.stringify(user)),
+              dispatch(updateUserData(user));
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -51,7 +40,10 @@ const Home: NextPage = () => {
     if present dispatch else call set user data
     */
     let user = JSON.parse(localStorage.getItem("user"));
-    user ? dispatch(updateUserData(user)) : setUser();
+    user ? dispatch(updateUserData(user)) : getUser();
+
+    //set the location of the window back without the code
+    // window.location.pathname = "";
   }, []);
 
   return (

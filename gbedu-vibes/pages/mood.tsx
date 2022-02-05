@@ -6,6 +6,7 @@ import { useDataContextVal } from "../context/dataContext";
 import { updateUserData } from "../context/actions";
 import SpotifyWebApi from "spotify-web-api-js";
 import PlaylistCard from "../components/PlaylistCard";
+import { setToken } from "../utils/set-token";
 
 const spotifyWeb = new SpotifyWebApi();
 
@@ -16,16 +17,19 @@ export default function Mood() {
   /*check if onreload user gets clear, save user data in the session storage? */
 
   useEffect(() => {
-    dispatch(updateUserData(JSON.parse(localStorage.getItem("user"))));
-    setLoading(true);
-    console.log(user?.id);
-    spotifyWeb
-      .getUserPlaylists(user?.id)
-      .then((response) => {
-        setData(response.items);
-        setLoading(false);
-      })
-      .catch((error) => console.log(error));
+    const token: string = setToken();
+    if (token) {
+      dispatch(updateUserData(JSON.parse(localStorage.getItem("user"))));
+      setLoading(true);
+      console.log(user?.id);
+      spotifyWeb
+        .getUserPlaylists(user?.id)
+        .then((response) => {
+          setData(response.items);
+          setLoading(false);
+        })
+        .catch((error) => console.log(error));
+    }
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
+import { setToken } from "../../utils/set-token";
 import { gql, useQuery } from "@apollo/client";
 
 export const firstQuery = gql`
@@ -29,11 +30,13 @@ const spotifyWeb = new SpotifyWebApi();
 
 export default function getMood({ id }) {
   useEffect(() => {
-    spotifyWeb.setAccessToken(localStorage.getItem("token"));
-    spotifyWeb
-      .getPlaylistTracks(id)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err));
+    let token = setToken();
+    if (token) {
+      spotifyWeb
+        .getPlaylistTracks(id)
+        .then((resp) => console.log(resp.items))
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   // console.log("id", id);

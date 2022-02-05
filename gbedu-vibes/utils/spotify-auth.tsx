@@ -13,16 +13,16 @@ const scopes: string[] = [
   // "playlist-modify-private",
 ];
 
-export const getToken = async (): Promise<any> => {
-  let code: string = window.location.href.split("=")[1];
+// export const getToken = async (): Promise<any> => {
+//   let code: string = window.location.href.split("=")[1];
 
-  if (code)
-    return _getToken(code)
-      .then((resp) => resp)
-      .catch((err) => err);
-};
+//   if (code)
+//     return _getToken(code)
+//       .then((resp) => resp)
+//       .catch((err) => err);
+// };
 
-const _getToken = async (code: string): Promise<any> => {
+export const getToken = async (code: string): Promise<any> => {
   return axios
     .post(
       "/api/users",
