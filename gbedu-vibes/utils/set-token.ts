@@ -20,7 +20,7 @@ export const setToken = () => {
         if (resp) {
           localStorage.setItem("token", JSON.stringify(resp));
           spotifyWeb.setAccessToken(resp.access_token);
-          return (token = tokenObject?.access_token);
+          return (token = resp?.access_token);
         }
       });
     }
